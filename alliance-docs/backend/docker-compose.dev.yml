@@ -1,0 +1,78 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: alliance-vault-postgres
+    environment:
+      POSTGRES_DB: alliance_vault
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "55432:5432"
+    volumes:
+      - alliance_vault_pg:/var/lib/postgresql/data
+
+  rustfs-volume-permission-helper:
+    image: alpine:3.20
+    container_name: alliance-vault-rustfs-perms
+    command:
+      - sh
+      - -c
+      - >
+        chown -R 10001:10001 /data0 /data1 /data2 /data3 /logs &&
+        echo 'RustFS volume permissions fixed'
+    volumes:
+      - alliance_vault_rustfs_data_0:/data0
+      - alliance_vault_rustfs_data_1:/data1
+      - alliance_vault_rustfs_data_2:/data2
+      - alliance_vault_rustfs_data_3:/data3
+      - alliance_vault_rustfs_logs:/logs
+    restart: "no"
+
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: alliance-vault-rustfs
+    depends_on:
+      rustfs-volume-permission-helper:
+        condition: service_completed_successfully
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      RUSTFS_VOLUMES: /data/rustfs{0...3}
+      RUSTFS_ADDRESS: 0.0.0.0:9000
+      RUSTFS_CONSOLE_ADDRESS: 0.0.0.0:9001
+      RUSTFS_CONSOLE_ENABLE: "true"
+      RUSTFS_CORS_ALLOWED_ORIGINS: "*"
+      RUSTFS_CONSOLE_CORS_ALLOWED_ORIGINS: "*"
+      RUSTFS_ACCESS_KEY: rustfsadmin
+      RUSTFS_SECRET_KEY: rustfsadmin
+      RUSTFS_OBS_LOGGER_LEVEL: info
+      RUSTFS_OBJECT_CACHE_ENABLE: "true"
+      RUSTFS_OBJECT_CACHE_TTL_SECS: "300"
+    volumes:
+      - alliance_vault_rustfs_data_0:/data/rustfs0
+      - alliance_vault_rustfs_data_1:/data/rustfs1
+      - alliance_vault_rustfs_data_2:/data/rustfs2
+      - alliance_vault_rustfs_data_3:/data/rustfs3
+      - alliance_vault_rustfs_logs:/app/logs
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sh",
+          "-c",
+          "curl -fsS http://127.0.0.1:9000/health && curl -fsS http://127.0.0.1:9001/rustfs/console/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+volumes:
+  alliance_vault_pg:
+  alliance_vault_rustfs_data_0:
+  alliance_vault_rustfs_data_1:
+  alliance_vault_rustfs_data_2:
+  alliance_vault_rustfs_data_3:
+  alliance_vault_rustfs_logs:

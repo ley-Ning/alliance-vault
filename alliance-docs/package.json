@@ -1,0 +1,77 @@
+{
+  "name": "alliance-vault",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "desktop:dev": "concurrently -k \"pnpm dev --host 127.0.0.1 --port 8080\" \"wait-on http://127.0.0.1:8080 && cross-env ELECTRON_START_URL=http://127.0.0.1:8080 electron electron/main.cjs\"",
+    "desktop:build": "pnpm build && electron-builder",
+    "desktop:pack": "pnpm build && electron-builder --dir"
+  },
+  "dependencies": {
+    "@tiptap/extension-character-count": "^3.20.0",
+    "@tiptap/extension-placeholder": "^3.20.0",
+    "@tiptap/react": "^3.20.0",
+    "@tiptap/starter-kit": "^3.20.0",
+    "antd": "^6.3.1",
+    "dayjs": "^1.11.19",
+    "marked": "^17.0.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "turndown": "^7.2.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/turndown": "^5.0.6",
+    "@vitejs/plugin-react": "^5.1.1",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.48.0",
+    "vite": "^7.3.1",
+    "wait-on": "^9.0.4"
+  },
+  "main": "electron/main.cjs",
+  "build": {
+    "appId": "com.alliance.vault",
+    "productName": "Alliance Vault",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    }
+  },
+  "description": "Alliance Vault（联盟文舱，Web + Desktop）",
+  "author": "Alliance Vault Team"
+}

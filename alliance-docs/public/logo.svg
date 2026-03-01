@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">联盟文舱 Logo</title>
+  <desc id="logoDesc">盾形文档徽章，象征团队协作与知识沉淀。</desc>
+  <defs>
+    <linearGradient id="bg" x1="32" y1="20" x2="220" y2="236" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#af3f32" />
+      <stop offset="0.52" stop-color="#97633c" />
+      <stop offset="1" stop-color="#1d6d64" />
+    </linearGradient>
+    <linearGradient id="shield" x1="128" y1="42" x2="128" y2="199" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.08" />
+    </linearGradient>
+  </defs>
+
+  <rect x="16" y="16" width="224" height="224" rx="56" fill="url(#bg)" />
+  <rect x="24" y="24" width="208" height="208" rx="48" fill="none" stroke="#fff4d8" stroke-opacity="0.35" stroke-width="2" />
+
+  <path
+    d="M128 40l66 30v53c0 43-27 72-66 90-39-18-66-47-66-90V70l66-30z"
+    fill="url(#shield)"
+    stroke="#fff6dc"
+    stroke-opacity="0.5"
+    stroke-width="3"
+  />
+
+  <path
+    d="M78 96c18 0 35 5 50 14v67c-15-10-32-15-50-15-8 0-15 1-22 4v-56c6-9 12-14 22-14z"
+    fill="#fffaf0"
+  />
+  <path
+    d="M178 96c-18 0-35 5-50 14v67c15-10 32-15 50-15 8 0 15 1 22 4v-56c-6-9-12-14-22-14z"
+    fill="#fff3de"
+  />
+
+  <rect x="123" y="102" width="10" height="84" rx="5" fill="#1d6d64" />
+  <path d="M90 126h24M90 145h24M142 126h24M142 145h24" stroke="#1d6d64" stroke-linecap="round" stroke-width="4" opacity="0.72" />
+
+  <circle cx="128" cy="78" r="12" fill="#ffd27a" />
+  <path d="M128 70v16M120 78h16" stroke="#8e5d18" stroke-linecap="round" stroke-width="3" />
+</svg>

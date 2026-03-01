@@ -1,0 +1,93 @@
+:root {
+  --ink-900: #1f1b15;
+  --ink-700: #3e3529;
+  --ink-500: #645849;
+  --paper-100: #f7f2e7;
+  --paper-200: #efe4cf;
+  --paper-300: #e6d6b7;
+  --jade-700: #1d6d64;
+  --jade-500: #2a8a7e;
+  --red-700: #9a2f27;
+  --red-500: #be4337;
+  --line-soft: rgba(78, 61, 43, 0.22);
+  --line-strong: rgba(68, 51, 34, 0.35);
+  font-family: 'Songti SC', 'STSong', 'Hiragino Sans GB', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--ink-900);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(221, 181, 98, 0.2) 0%, transparent 42%),
+    radial-gradient(circle at 83% 8%, rgba(39, 131, 116, 0.16) 0%, transparent 44%),
+    radial-gradient(circle at 78% 78%, rgba(176, 74, 58, 0.14) 0%, transparent 48%),
+    linear-gradient(130deg, #fbf7f0 0%, #efe5d2 60%, #ebdcc4 100%);
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(91, 73, 49, 0.045) 0px,
+      rgba(91, 73, 49, 0.045) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(91, 73, 49, 0.03) 0px,
+      rgba(91, 73, 49, 0.03) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+}
+
+body::after {
+  box-shadow: inset 0 0 140px rgba(35, 29, 21, 0.14);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: 'STKaiti', 'Kaiti SC', 'Songti SC', serif;
+  letter-spacing: 0.02em;
+}
